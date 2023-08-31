@@ -23,4 +23,4 @@ jobs:
       uses: stack-spot/runtime-github-action-iac@main
       with:
         FEATURES_LEVEL_LOG: debug
-        input_path: iac.yaml
+        INPUT_PATH: iac.yaml
