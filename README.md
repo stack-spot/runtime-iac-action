@@ -23,4 +23,4 @@ _**Note**: This action is supported on debian/RHEl like systems
 
 ## License
 
-[Apache License 2.0](https://github.com/stack-spot/runtime-github-action-ping/blob/main/LICENSE)
+[Apache License 2.0](https://github.com/stack-spot/runtime-github-action-iac/blob/main/LICENSE)
