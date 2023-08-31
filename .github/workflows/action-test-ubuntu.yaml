@@ -3,7 +3,7 @@ name: Action Test Ubuntu
 on:
   push:
     paths:
-      - '.github/workflows/action-test-linux.yaml'
+      - '.github/workflows/action-test-ubuntu.yaml'
       - 'action.yaml'
   workflow_dispatch:
 
@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@v3
       
     - name: Run Runtime IaC Action
-      uses: stack-spot/runtime-github-action-iac@main
+      uses: stack-spot/runtime-github-action-iac@docker
       with:
         FEATURES_LEVEL_LOG: debug
         input_path: iac.yaml
