@@ -16,9 +16,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      
     - name: Run Runtime IaC Action
       uses: stack-spot/runtime-github-action-iac@main
       with:
