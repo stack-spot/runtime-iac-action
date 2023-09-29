@@ -27,7 +27,7 @@ inputs:
     required: true 
   BASE_PATH_OUTPUT:
     description: "Base Path Output"
-    required: true 
+    required: false 
 
 runs:
   using: "composite"
