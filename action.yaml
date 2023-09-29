@@ -4,14 +4,34 @@ inputs:
   FEATURES_LEVEL_LOG:
     description: "Log Level"
     required: true
-  input_path:
-    description: "Input file name"
+  CLIENT_ID:
+    description: "CLIENT ID"
     required: true
+  CLIENT_KEY:
+    description: "CLIENT KEY"
+    required: true
+  CLIENT_REALM:
+    description: "CLIENT REALM"
+    required: true 
+  AWS_ACCESS_KEY_ID:
+    description: "AWS ACCESS KEY ID from console"
+    required: true 
+  AWS_SECRET_ACCESS_KEY:
+    description: "AWS SECRET ACCESS KEY from console"
+    required: true 
+  AWS_SESSION_TOKEN:
+    description: "AWS SESSION TOKEN from console"
+    required: true 
+  RUN_TASK_ID:
+    description: "Runtime Run Task Id"
+    required: true 
+  BASE_PATH_OUTPUT:
+    description: "Base Path Output"
+    required: true 
 
 runs:
   using: "composite"
   steps:
-
     - name: Check Runner
       run: echo 🤖 OS runner is $(uname)
       shell: bash
@@ -20,8 +40,16 @@ runs:
       run: |
         docker run --rm \
         -e FEATURES_LEVEL_LOG=${{ inputs.FEATURES_LEVEL_LOG }} \
+        -e AUTHENTICATE_CLIENT_ID=${{ inputs.CLIENT_ID }} \
+        -e AUTHENTICATE_CLIENT_SECRET=${{ inputs.CLIENT_KEY }} \
+        -e AUTHENTICATE_CLIENT_REALMS=${{ inputs.CLIENT_REALM }} \
+        -e AUTHENTICATE_URL='https://idm.qa.stackspot.com' \
+        -e FEATURES_API_MANAGER='https://runtime-manager.qa.stackspot.com' \
+        -e AWS_ACCESS_KEY_ID=${{ inputs.AWS_ACCESS_KEY_ID }} \
+        -e AWS_SECRET_ACCESS_KEY=${{ inputs.AWS_SECRET_ACCESS_KEY }} \
+        -e AWS_SESSION_TOKEN=${{ inputs.AWS_SESSION_TOKEN }} \
         --entrypoint=/app/stackspot-runtime-job-iac \
-        stackspot/runtime-iac start --input-path=${{ inputs.input_path }}
+        stackspot/runtime-iac start --run-task-id=${{ inputs.RUN_TASK_ID }} --base-path-output=${{ inputs.BASE_PATH_OUTPUT }}
       shell: bash
 
 branding:
