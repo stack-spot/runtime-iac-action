@@ -20,4 +20,11 @@ jobs:
       uses: stack-spot/runtime-github-action-iac@main
       with:
         FEATURES_LEVEL_LOG: debug
-        INPUT_PATH: iac.yaml
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        CLIENT_KEY: ${{ secrets.CLIENT_KEY }}
+        CLIENT_REALM: ${{ secrets.CLIENT_REALM }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+        RUN_TASK_ID: runTaskId
+        BASE_PATH_OUTPUT: opt/runtime
