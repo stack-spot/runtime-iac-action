@@ -22,6 +22,9 @@ inputs:
   AWS_SESSION_TOKEN:
     description: "AWS SESSION TOKEN from console"
     required: true 
+  AWS_REGION:
+    description: "AWS REGION"
+    required: true 
   RUN_TASK_ID:
     description: "Runtime Run Task Id"
     required: true 
@@ -48,6 +51,7 @@ runs:
         -e AWS_ACCESS_KEY_ID=${{ inputs.AWS_ACCESS_KEY_ID }} \
         -e AWS_SECRET_ACCESS_KEY=${{ inputs.AWS_SECRET_ACCESS_KEY }} \
         -e AWS_SESSION_TOKEN=${{ inputs.AWS_SESSION_TOKEN }} \
+        -e AWS_REGION=${{ inputs.AWS_REGION }} \
         --entrypoint=/app/stackspot-runtime-job-iac \
         stackspot/runtime-iac start --run-task-id="${{ inputs.RUN_TASK_ID }}" --base-path-output="${{ inputs.BASE_PATH_OUTPUT }}"
       shell: bash
