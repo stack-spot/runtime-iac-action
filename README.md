@@ -1,4 +1,4 @@
-# runtime-github-action-iac
+# runtime-iac-action
 
 [![Action test Ubuntu](https://github.com/stack-spot/runtime-github-action-ping/actions/workflows/action-test-ubuntu.yaml/badge.svg)](https://github.com/stack-spot/runtime-github-action-ping/actions/workflows/action-test-ubuntu.yaml)
 
@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Worker IAC
         if: contains( matrix.task.taskType , 'IAC')
-        uses: stack-spot/runtime-github-action-iac@v1
+        uses: stack-spot/runtime-iac-action@v1
         with:
           FEATURES_LEVEL_LOG: debug
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
