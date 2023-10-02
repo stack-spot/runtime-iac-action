@@ -4,7 +4,7 @@
 
 GitHub action to run StackSpot Runtime Iac Worker.
 
-_**Note**: This action is supported on debian/RHEl like systems
+_**Note**: This action is supported on debian/RHEl like systems_
 
 ## 📚 Usage
 
