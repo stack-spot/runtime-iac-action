@@ -38,7 +38,7 @@ jobs:
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
           AWS_REGION: sa-east-1
           RUN_TASK_ID: ${{ matrix.task.runTaskId }}
-          BASE_PATH_OUTPUT: path/to/file
+          BASE_PATH_OUTPUT: path/to/save/file # not mandatory
 ```
 
 ## License
