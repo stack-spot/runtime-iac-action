@@ -53,7 +53,7 @@ runs:
         -e AWS_SESSION_TOKEN=${{ inputs.AWS_SESSION_TOKEN }} \
         -e AWS_REGION=${{ inputs.AWS_REGION }} \
         --entrypoint=/app/stackspot-runtime-job-iac \
-        stackspot/runtime-iac start --run-task-id="${{ inputs.RUN_TASK_ID }}" --base-path-output="${{ inputs.BASE_PATH_OUTPUT }}"
+        stackspot/runtime-job-iac:latest --run-task-id="${{ inputs.RUN_TASK_ID }}" --base-path-output="${{ inputs.BASE_PATH_OUTPUT }}"
       shell: bash
 
 branding:
