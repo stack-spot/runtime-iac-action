@@ -25,7 +25,7 @@ jobs:
        fail-fast: true
        max-parallel: 1
     steps:
-      - name: Worker IAC
+      - name: IAC
         if: contains( matrix.task.taskType , 'IAC')
         uses: stack-spot/runtime-iac-action@v1
         with:
