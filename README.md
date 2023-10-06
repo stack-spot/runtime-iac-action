@@ -46,7 +46,7 @@ jobs:
 ## ▶️ Action Inputs
 
 Field | Mandatory | Observation
------------- | ------------  | ------------- | -------------
+------------ | ------------  | ------------- 
 **CLIENT_ID** | YES | [StackSpot](https://stackspot.com/en/settings/access-token) Client ID.
 **CLIENT_KEY** | YES |[StackSpot](https://stackspot.com/en/settings/access-token) Client KEY.
 **CLIENT_REALM** | YES | [StackSpot](https://stackspot.com/en/settings/access-token) Client Realm.
