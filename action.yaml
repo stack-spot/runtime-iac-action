@@ -44,26 +44,26 @@ runs:
 
     - name: Configure aws credentials
       id: aws-cred
-      if: ${{ inputs.ROLE_ARN != 0 }}
+      if: ${{ inputs.AWS_ROLE_ARN != 0 }}
       uses: aws-actions/configure-aws-credentials@v3
       with:
-        role-to-assume: ${{ inputs.ROLE_ARN }}
+        role-to-assume: ${{ inputs.AWS_ROLE_ARN }}
         aws-region: ${{ inputs.AWS_REGION }}
 
     - name: Run Runtime Action Iac
-      if: ${{ inputs.ROLE_ARN != 0 }}
+      if: ${{ inputs.AWS_ROLE_ARN != 0 }}
       run: |
-        echo "oidc - ${{ inputs.ROLE_ARN }} - ${{ steps.aws-cred.outputs.aws-access-key-id }} - ${{ steps.aws-cred.outputs.aws-secret-access-key }} - ${{ steps.aws-cred.outputs.aws-session-token }} "
+        echo "oidc - ${{ inputs.AWS_ROLE_ARN }} - ${{ steps.aws-cred.outputs.aws-access-key-id }} - ${{ steps.aws-cred.outputs.aws-secret-access-key }} - ${{ steps.aws-cred.outputs.aws-session-token }} "
       shell: bash
 
     - name: Run Runtime Action Iac
-      if: ${{ inputs.ROLE_ARN == 0 }}
+      if: ${{ inputs.AWS_ROLE_ARN == 0 }}
       run: |
         echo "secret - ${{ inputs.AWS_ACCESS_KEY_ID }} - ${{ inputs.AWS_SECRET_ACCESS_KEY }} - ${{ inputs.AWS_SESSION_TOKEN }}"
       shell: bash
       
     - name: Run Runtime Action Iac
-      if: ${{ inputs.ROLE_ARN == 0 }}
+      if: ${{ inputs.AWS_ROLE_ARN == 0 }}
       run: |
         docker run --rm \
         -e FEATURES_LEVEL_LOG=${{ inputs.FEATURES_LEVEL_LOG }} \
@@ -81,7 +81,7 @@ runs:
       shell: bash
 
     - name: Run Runtime Action Iac
-      if: ${{ inputs.ROLE_ARN != 0 }}
+      if: ${{ inputs.AWS_ROLE_ARN != 0 }}
       run: |
         docker run --rm \
         -e FEATURES_LEVEL_LOG=${{ inputs.FEATURES_LEVEL_LOG }} \
