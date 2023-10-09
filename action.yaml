@@ -12,28 +12,28 @@ inputs:
     required: true
   CLIENT_REALM:
     description: "CLIENT REALM"
-    required: true 
+    required: true
   AWS_ACCESS_KEY_ID:
     description: "AWS ACCESS KEY ID from console"
-    required: false 
+    required: false
   AWS_SECRET_ACCESS_KEY:
     description: "AWS SECRET ACCESS KEY from console"
-    required: false 
+    required: false
   AWS_SESSION_TOKEN:
     description: "AWS SESSION TOKEN from console"
-    required: false 
+    required: false
   AWS_REGION:
     description: "AWS REGION"
     required: true
   AWS_ROLE_ARN:
     description: "AWS ROLE ARN"
-    required: false 
+    required: false
   RUN_TASK_ID:
     description: "Runtime Run Task Id"
-    required: true 
+    required: true
   BASE_PATH_OUTPUT:
     description: "Base Path Output"
-    required: false 
+    required: false
 
 runs:
   using: "composite"
@@ -49,6 +49,18 @@ runs:
       with:
         role-to-assume: ${{ inputs.ROLE_ARN }}
         aws-region: ${{ inputs.AWS_REGION }}
+
+    - name: Run Runtime Action Iac
+      if: ${{ inputs.ROLE_ARN == 0 }}
+      run: |
+        echo "oidc - ${{ steps.aws-cred.outputs.aws-access-key-id }} - ${{ steps.aws-cred.outputs.aws-secret-access-key }} - ${{ steps.aws-cred.outputs.aws-session-token }} "
+      shell: bash
+
+    - name: Run Runtime Action Iac
+      if: ${{ inputs.ROLE_ARN == 0 }}
+      run: |
+        echo "secret - ${{ inputs.AWS_ACCESS_KEY_ID }} - ${{ inputs.AWS_SECRET_ACCESS_KEY }} - ${{ inputs.AWS_SESSION_TOKEN }}"
+      shell: bash
       
     - name: Run Runtime Action Iac
       if: ${{ inputs.ROLE_ARN == 0 }}
