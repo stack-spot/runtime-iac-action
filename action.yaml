@@ -51,9 +51,9 @@ runs:
         aws-region: ${{ inputs.AWS_REGION }}
 
     - name: Run Runtime Action Iac
-      if: ${{ inputs.ROLE_ARN == 0 }}
+      if: ${{ inputs.ROLE_ARN != 0 }}
       run: |
-        echo "oidc - ${{ steps.aws-cred.outputs.aws-access-key-id }} - ${{ steps.aws-cred.outputs.aws-secret-access-key }} - ${{ steps.aws-cred.outputs.aws-session-token }} "
+        echo "oidc - ${{ inputs.ROLE_ARN }} - ${{ steps.aws-cred.outputs.aws-access-key-id }} - ${{ steps.aws-cred.outputs.aws-secret-access-key }} - ${{ steps.aws-cred.outputs.aws-session-token }} "
       shell: bash
 
     - name: Run Runtime Action Iac
