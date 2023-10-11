@@ -50,18 +50,6 @@ runs:
         role-to-assume: ${{ inputs.AWS_ROLE_ARN }}
         aws-region: ${{ inputs.AWS_REGION }}
         output-credentials: true
-
-    - name: Run Runtime Action Iac
-      if: ${{ inputs.AWS_ROLE_ARN != 0 }}
-      run: |
-        echo "oidc - ${{ inputs.AWS_ROLE_ARN }} - ${{ steps.aws-cred.outputs.aws-access-key-id }} - ${{ steps.aws-cred.outputs.aws-secret-access-key }} - ${{ steps.aws-cred.outputs.aws-session-token }} "
-      shell: bash
-
-    - name: Run Runtime Action Iac
-      if: ${{ inputs.AWS_ROLE_ARN == 0 }}
-      run: |
-        echo "secret - ${{ inputs.AWS_ACCESS_KEY_ID }} - ${{ inputs.AWS_SECRET_ACCESS_KEY }} - ${{ inputs.AWS_SESSION_TOKEN }}"
-      shell: bash
       
     - name: Run Runtime Action Iac
       if: ${{ inputs.AWS_ROLE_ARN == 0 }}
