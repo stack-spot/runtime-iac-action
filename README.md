@@ -47,6 +47,7 @@ jobs:
 
 Field | Mandatory | Observation
 ------------ | ------------  | ------------- 
+**FEATURES_LEVEL_LOG** | YES | Log Level
 **CLIENT_ID** | YES | [StackSpot](https://stackspot.com/en/settings/access-token) Client ID.
 **CLIENT_KEY** | YES | [StackSpot](https://stackspot.com/en/settings/access-token) Client KEY.
 **CLIENT_REALM** | YES | [StackSpot](https://stackspot.com/en/settings/access-token) Client Realm.
