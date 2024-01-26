@@ -45,6 +45,17 @@ runs:
       run: echo 🤖 OS runner is $(uname)
       shell: bash
 
+    - name: Clear AWS ENV VAR if exists
+      if: ${{ inputs.AWS_ROLE_ARN != 0 }}
+      run: |
+        export BACKUP_AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+        export BACKUP_AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+        export BACKUP_AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN
+        unset AWS_ACCESS_KEY_ID
+        unset AWS_SECRET_ACCESS_KEY
+        unset AWS_SESSION_TOKEN
+      shell: bash
+
     - name: Configure aws credentials
       id: aws-cred
       if: ${{ inputs.AWS_ROLE_ARN != 0 }}
@@ -88,6 +99,17 @@ runs:
         -e AWS_REGION=${{ inputs.AWS_REGION }} \
         --entrypoint=/app/stackspot-runtime-job-iac \
         ${{ inputs.CONTAINER_URL }}:2.11.0 start --run-task-id="${{ inputs.RUN_TASK_ID }}" --base-path-output="${{ inputs.BASE_PATH_OUTPUT }}"
+      shell: bash
+
+    - name: Reset AWS ENV VAR if exists
+      if: ${{ inputs.AWS_ROLE_ARN != 0 }}
+      run: |
+        export AWS_ACCESS_KEY_ID=$BACKUP_AWS_ACCESS_KEY_ID
+        export AWS_SECRET_ACCESS_KEY=$BACKUP_AWS_SECRET_ACCESS_KEY
+        export AWS_SESSION_TOKEN=$BACKUP_AWS_SESSION_TOKEN
+        unset BACKUP_AWS_ACCESS_KEY_ID
+        unset BACKUP_AWS_SECRET_ACCESS_KEY
+        unset BACKUP_AWS_SESSION_TOKEN
       shell: bash
 
 branding:
