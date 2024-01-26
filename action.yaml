@@ -87,7 +87,7 @@ runs:
         -e AWS_SESSION_TOKEN=${{ steps.aws-cred.outputs.aws-session-token }} \
         -e AWS_REGION=${{ inputs.AWS_REGION }} \
         --entrypoint=/app/stackspot-runtime-job-iac \
-        ${{ inputs.CONTAINER_URL }}:latest start --run-task-id="${{ inputs.RUN_TASK_ID }}" --base-path-output="${{ inputs.BASE_PATH_OUTPUT }}"
+        ${{ inputs.CONTAINER_URL }}:2.11.0 start --run-task-id="${{ inputs.RUN_TASK_ID }}" --base-path-output="${{ inputs.BASE_PATH_OUTPUT }}"
       shell: bash
 
 branding:
