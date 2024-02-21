@@ -104,6 +104,7 @@ runs:
 
     - name: Cleanup
       if: ${{ inputs.HOOK_ENV_VARS != '' }}
+      shell: bash
       run: |
         rm -f hook.env
 
