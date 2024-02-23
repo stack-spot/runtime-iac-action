@@ -37,6 +37,13 @@ inputs:
   CONTAINER_URL:
     description: "IAC Container url"
     default: stackspot/runtime-job-iac
+  HOOK_ENV_VARS:
+    description: |
+      Hook Environment Variables, use it like a .env file
+      VAR_ONE=1
+      VAR_TWO=2
+    required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -44,6 +51,12 @@ runs:
     - name: Check Runner
       run: echo 🤖 OS runner is $(uname)
       shell: bash
+
+    - name: Creating Env File
+      if: ${{ inputs.HOOK_ENV_VARS != '' }}
+      shell: bash
+      run: |
+        echo ${{ inputs.HOOK_ENV_VARS }} >> hook.env
 
     - name: Configure aws credentials
       id: aws-cred
@@ -69,6 +82,7 @@ runs:
         -e AWS_SESSION_TOKEN=${{ inputs.AWS_SESSION_TOKEN }} \
         -e AWS_REGION=${{ inputs.AWS_REGION }} \
         --entrypoint=/app/stackspot-runtime-job-iac \
+        --env-file ./hook.env \
         ${{ inputs.CONTAINER_URL }}:latest start --run-task-id="${{ inputs.RUN_TASK_ID }}" --base-path-output="${{ inputs.BASE_PATH_OUTPUT }}"
       shell: bash
 
@@ -87,6 +101,7 @@ runs:
         -e AWS_SESSION_TOKEN=${{ steps.aws-cred.outputs.aws-session-token }} \
         -e AWS_REGION=${{ inputs.AWS_REGION }} \
         --entrypoint=/app/stackspot-runtime-job-iac \
+        --env-file ./hook.env \
         ${{ inputs.CONTAINER_URL }}:latest start --run-task-id="${{ inputs.RUN_TASK_ID }}" --base-path-output="${{ inputs.BASE_PATH_OUTPUT }}"
       shell: bash
 
