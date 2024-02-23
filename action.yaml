@@ -102,12 +102,6 @@ runs:
         stackspot/runtime-job-iac:rc-2.13.0 start --run-task-id="${{ inputs.RUN_TASK_ID }}" --base-path-output="${{ inputs.BASE_PATH_OUTPUT }}"
       shell: bash
 
-    - name: Cleanup
-      if: ${{ inputs.HOOK_ENV_VARS != '' }}
-      shell: bash
-      run: |
-        rm -f hook.env
-
 branding:
     icon: 'terminal'
     color: 'orange'
